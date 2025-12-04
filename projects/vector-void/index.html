@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECTOR VOID</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <nav class="project-nav">
+            <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        </nav>
+
+        <div id="game-container">
+            <canvas id="gameCanvas"></canvas>
+            <div class="scanline"></div>
+            <div class="vignette"></div>
+
+            <!-- UI Overlay -->
+            <div id="ui-layer">
+                <div id="hud" class="hidden">
+                    <div class="score-container">SCORE: <span id="score">0</span></div>
+                    <div class="lives-container">LIVES: <span id="lives">3</span></div>
+                </div>
+
+                <div id="main-menu" class="screen active">
+                    <h1 class="title">VECTOR <span class="void">VOID</span></h1>
+                    <p class="subtitle">PHYSICS // INERTIA // CHAOS</p>
+                    <button id="start-btn" class="btn">INITIALIZE SYSTEM</button>
+                    <div class="controls-hint">
+                        <span>▲ THRUST</span>
+                        <span>◀ ▶ ROTATE</span>
+                        <span>SPACE SHOOT</span>
+                    </div>
+                </div>
+
+                <div id="game-over" class="screen hidden">
+                    <h2 class="danger">SYSTEM FAILURE</h2>
+                    <p>FINAL SCORE: <span id="final-score">0</span></p>
+                    <button id="restart-btn" class="btn">REBOOT</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="project-info">
+            <h2>About this Project</h2>
+            <p>
+                Vector Void is a high-octane space shooter that pays homage to the vector graphics era of arcade gaming.
+                It features a custom-built physics engine handling inertia, momentum, and gravity.
+            </p>
+            <ul class="feature-list">
+                <li><strong>Vector Physics Engine:</strong> Realistic drift mechanics and collision detection built from
+                    scratch.</li>
+                <li><strong>Gravity Systems:</strong> Dynamic black holes that bend projectiles and pull entities using
+                    vector field math.</li>
+                <li><strong>Procedural Generation:</strong> Asteroids with unique geometry and splitting mechanics.</li>
+                <li><strong>Procedural Audio:</strong> Sound effects generated in real-time using the Web Audio API
+                    (oscillators and gain nodes).</li>
+            </ul>
+            <p>
+                The project explores the intersection of math and art, using raw geometry and neon aesthetics to create
+                an immersive experience.
+            </p>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/engine/Vector.js"></script>
+    <script src="js/engine/Input.js"></script>
+    <script src="js/engine/Audio.js"></script>
+    <script src="js/entities/Particle.js"></script>
+    <script src="js/entities/Player.js"></script>
+    <script src="js/entities/Enemy.js"></script>
+    <script src="js/entities/Asteroid.js"></script>
+    <script src="js/entities/BlackHole.js"></script>
+    <script src="js/entities/Bullet.js"></script>
+    <script src="js/engine/Game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
