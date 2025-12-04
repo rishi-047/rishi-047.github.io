@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECTOR VOID - FULLSCREEN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Override container styles for fullscreen */
+        #game-container {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+        }
+
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div class="scanline"></div>
+        <div class="vignette"></div>
+
+        <!-- UI Overlay -->
+        <div id="ui-layer">
+            <div id="hud" class="hidden">
+                <div class="score-container">SCORE: <span id="score">0</span></div>
+                <div class="lives-container">LIVES: <span id="lives">3</span></div>
+            </div>
+
+            <div id="main-menu" class="screen active">
+                <h1 class="title">VECTOR <span class="void">VOID</span></h1>
+                <p class="subtitle">PHYSICS // INERTIA // CHAOS</p>
+                <button id="start-btn" class="btn">INITIALIZE SYSTEM</button>
+                <div class="controls-hint">
+                    <span>▲ THRUST</span>
+                    <span>◀ ▶ ROTATE</span>
+                    <span>SPACE SHOOT</span>
+                </div>
+            </div>
+
+            <div id="game-over" class="screen hidden">
+                <h2 class="danger">SYSTEM FAILURE</h2>
+                <p>FINAL SCORE: <span id="final-score">0</span></p>
+                <button id="restart-btn" class="btn">REBOOT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/engine/Vector.js"></script>
+    <script src="js/engine/Input.js"></script>
+    <script src="js/engine/Audio.js"></script>
+    <script src="js/entities/Particle.js"></script>
+    <script src="js/entities/Player.js"></script>
+    <script src="js/entities/Enemy.js"></script>
+    <script src="js/entities/Asteroid.js"></script>
+    <script src="js/entities/BlackHole.js"></script>
+    <script src="js/entities/Bullet.js"></script>
+    <script src="js/engine/Game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
