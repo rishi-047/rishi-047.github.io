@@ -33,8 +33,9 @@ class Game {
     }
 
     resize() {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        const container = this.canvas.parentElement;
+        this.width = container.clientWidth;
+        this.height = container.clientHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
     }
