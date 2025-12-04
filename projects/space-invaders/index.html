@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders: Enhanced Edition</title>
+    <meta name="description"
+        content="A modern Space Invaders game with 10 levels, epic boss fights, and stunning visuals">
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <nav class="project-nav">
+            <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        </nav>
+
+        <div id="game-container">
+            <canvas id="gameCanvas"></canvas>
+
+            <!-- Main Menu -->
+            <div id="main-menu" class="menu-screen active">
+                <div class="menu-content">
+                    <h1 class="game-title">
+                        <span class="title-space">SPACE</span>
+                        <span class="title-invaders">INVADERS</span>
+                    </h1>
+                    <p class="subtitle">ENHANCED EDITION</p>
+                    <div class="menu-buttons">
+                        <button id="start-btn" class="menu-btn primary">START GAME</button>
+                        <button id="controls-btn" class="menu-btn">CONTROLS</button>
+                        <button id="highscores-btn" class="menu-btn">HIGH SCORES</button>
+                    </div>
+                    <div class="high-score-display">
+                        <span>HIGH SCORE:</span>
+                        <span id="menu-highscore">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls Screen -->
+            <div id="controls-screen" class="menu-screen">
+                <div class="menu-content">
+                    <h2>CONTROLS</h2>
+                    <div class="controls-list">
+                        <div class="control-item">
+                            <span class="key">← →</span>
+                            <span class="action">Move Ship</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">SPACE</span>
+                            <span class="action">Shoot</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">P</span>
+                            <span class="action">Pause</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">M</span>
+                            <span class="action">Mute Sound</span>
+                        </div>
+                    </div>
+                    <button id="controls-back-btn" class="menu-btn">BACK</button>
+                </div>
+            </div>
+
+            <!-- High Scores Screen -->
+            <div id="highscores-screen" class="menu-screen">
+                <div class="menu-content">
+                    <h2>HIGH SCORES</h2>
+                    <div id="highscores-list" class="highscores-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                    <button id="highscores-back-btn" class="menu-btn">BACK</button>
+                </div>
+            </div>
+
+            <!-- Pause Screen -->
+            <div id="pause-screen" class="menu-screen">
+                <div class="menu-content">
+                    <h2>PAUSED</h2>
+                    <div class="menu-buttons">
+                        <button id="resume-btn" class="menu-btn primary">RESUME</button>
+                        <button id="quit-btn" class="menu-btn">QUIT TO MENU</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameover-screen" class="menu-screen">
+                <div class="menu-content">
+                    <h2 class="gameover-title">GAME OVER</h2>
+                    <div class="final-score">
+                        <span>FINAL SCORE</span>
+                        <span id="final-score-value">0</span>
+                    </div>
+                    <div id="new-highscore" class="new-highscore hidden">
+                        <span>🏆 NEW HIGH SCORE! 🏆</span>
+                    </div>
+                    <div class="menu-buttons">
+                        <button id="retry-btn" class="menu-btn primary">PLAY AGAIN</button>
+                        <button id="menu-btn" class="menu-btn">MAIN MENU</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Victory Screen -->
+            <div id="victory-screen" class="menu-screen">
+                <div class="menu-content">
+                    <h2 class="victory-title">VICTORY!</h2>
+                    <p class="victory-subtitle">You defeated the Mothership!</p>
+                    <div class="final-score">
+                        <span>FINAL SCORE</span>
+                        <span id="victory-score-value">0</span>
+                    </div>
+                    <div class="menu-buttons">
+                        <button id="victory-retry-btn" class="menu-btn primary">PLAY AGAIN</button>
+                        <button id="victory-menu-btn" class="menu-btn">MAIN MENU</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Transition Screen -->
+            <div id="level-transition" class="menu-screen">
+                <div class="menu-content">
+                    <h2 class="level-title">LEVEL <span id="level-number">1</span></h2>
+                    <p class="level-name" id="level-name">Deep Space</p>
+                </div>
+            </div>
+
+            <!-- HUD -->
+            <div id="hud" class="hidden">
+                <div class="hud-left">
+                    <div class="score-display">
+                        <span class="hud-label">SCORE</span>
+                        <span id="score">0</span>
+                    </div>
+                    <div class="lives-display">
+                        <span class="hud-label">LIVES</span>
+                        <div id="lives-icons"></div>
+                    </div>
+                </div>
+                <div class="hud-center">
+                    <div class="level-display">
+                        <span class="hud-label">LEVEL</span>
+                        <span id="current-level">1</span>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <div class="powerup-display">
+                        <span class="hud-label">POWER-UP</span>
+                        <span id="active-powerup">NONE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boss Health Bar -->
+            <div id="boss-health-container" class="hidden">
+                <div class="boss-name">THE MOTHERSHIP</div>
+                <div class="boss-health-bar">
+                    <div id="boss-health-fill"></div>
+                    <div class="boss-phase-markers">
+                        <div class="phase-marker" style="left: 33%"></div>
+                        <div class="phase-marker" style="left: 66%"></div>
+                    </div>
+                </div>
+                <div class="boss-phase">PHASE <span id="boss-phase">1</span></div>
+            </div>
+        </div>
+
+        <section class="project-info">
+            <h2>About this Project</h2>
+            <p>
+                Space Invaders: Enhanced Edition is a modern reimagining of the classic arcade shooter, built entirely
+                with vanilla JavaScript and HTML5 Canvas.
+                This project demonstrates advanced game development concepts including:
+            </p>
+            <ul class="feature-list">
+                <li><strong>Custom Game Engine:</strong> Built from scratch with a dedicated game loop, state
+                    management, and entity-component system.</li>
+                <li><strong>Procedural Generation:</strong> Dynamic starfields, nebulas, and particle effects that
+                    create a unique visual experience every time.</li>
+                <li><strong>Complex AI Behaviors:</strong> Multi-phase boss fights with adaptive attack patterns and
+                    pathfinding algorithms.</li>
+                <li><strong>Performance Optimization:</strong> Object pooling for particles and projectiles to maintain
+                    60 FPS even with hundreds of entities.</li>
+            </ul>
+            <p>
+                The goal was to create a visually stunning and responsive web game without relying on external game
+                engines or libraries.
+            </p>
+        </section>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/engine/ParticleSystem.js"></script>
+    <script src="js/engine/AudioManager.js"></script>
+    <script src="js/engine/InputHandler.js"></script>
+    <script src="js/engine/SceneryManager.js"></script>
+    <script src="js/entities/Projectile.js"></script>
+    <script src="js/entities/PowerUp.js"></script>
+    <script src="js/entities/Player.js"></script>
+    <script src="js/entities/Enemy.js"></script>
+    <script src="js/entities/Boss.js"></script>
+    <script src="js/game/CollisionManager.js"></script>
+    <script src="js/game/ScoreManager.js"></script>
+    <script src="js/game/LevelManager.js"></script>
+    <script src="js/ui/HUD.js"></script>
+    <script src="js/ui/Menu.js"></script>
+    <script src="js/engine/Game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
